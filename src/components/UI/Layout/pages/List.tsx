@@ -1,44 +1,73 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// ArticleListPage.tsx
-import React from 'react';
-import { Grid, Typography, Box } from '@mui/material';
-import { articles } from '../../../Context/articles'; // Ensure the path is correct
-import Card from './Card';
-import Layout from '../Layout';
-interface ArticleListPageProps {
-    selectedCategory: string | null;
-}
+import React, { useState } from "react";
+import { useArticles } from "../../../Context/ArticlesContext";
+import Layout from "../Layout";
+const ProductList = () => {
+  const { articlesList, deleteArticle, editArticle } = useArticles();
+  const [editMode, setEditMode] = useState(false);
+  const [currentArticle, setCurrentArticle] = useState(null);
 
-const ArticleListPage: React.FC<ArticleListPageProps> = ({ selectedCategory }) => {
-    const filteredArticles = selectedCategory
-        ? articles.filter(article => article.type === selectedCategory)
-        : articles;
+  const handleDelete = (id) => {
+    deleteArticle(id);
+  };
 
-    return (
-        <Box sx={{ padding: 3 }}>
-            <Layout onCategorySelect={function (category: string): void {
-                throw new Error('Function not implemented.');
-            } }>
-            <Typography variant="h4" sx={{ marginBottom: 2 }}>
-                {selectedCategory ? `${selectedCategory} Products` : 'All Products'}
-            </Typography>
+  const handleEdit = (article) => {
+    setEditMode(true);
+    setCurrentArticle(article);
+  };
 
-            {filteredArticles.length === 0 ? (
-                <Typography variant="h6" color="textSecondary">
-                    No products available for the selected category.
-                </Typography>
-            ) : (
-                <Grid container spacing={2}>
-                    {filteredArticles.map(article => (
-                        <Grid item key={article.id} xs={12} sm={6} md={4} lg={3}>
-                            <Card article={article} />
-                        </Grid>
-                    ))}
-                </Grid>
-            )}
-            </Layout>
-        </Box>
-    );
+  const handleSave = (updatedArticle) => {
+    editArticle(updatedArticle);
+    setEditMode(false);
+    setCurrentArticle(null);
+  };
+
+  return (
+    <Layout onCategorySelect={function (category: string): void {
+          throw new Error("Function not implemented.");
+      } }>
+    <div>
+       
+      <h2>Product List</h2>
+      <div className="product-grid">
+        {articlesList.map((article) => (
+          <div key={article.id} className="product-card">
+            <img src={article.image} alt={article.name} />
+            <h3>{article.name}</h3>
+            <p>{article.description}</p>
+            <p>{article.price}</p>
+            <button onClick={() => handleEdit(article)}>Edit</button>
+            <button onClick={() => handleDelete(article.id)}>Delete</button>
+          </div>
+        ))}
+      </div>
+
+      {editMode && currentArticle && (
+        <div className="edit-form">
+          <h3>Edit Article</h3>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <input
+              type="text"
+              value={currentArticle.name}
+              onChange={(e) => setCurrentArticle({ ...currentArticle, name: e.target.value })}
+            />
+            <input
+              type="text"
+              value={currentArticle.price}
+              onChange={(e) => setCurrentArticle({ ...currentArticle, price: e.target.value })}
+            />
+            <textarea
+              value={currentArticle.description}
+              onChange={(e) => setCurrentArticle({ ...currentArticle, description: e.target.value })}
+            />
+            <button type="submit" onClick={() => handleSave(currentArticle)}>Save</button>
+          </form>
+        </div>
+      )}
+    </div>
+    </Layout>
+
+  );
 };
 
-export default ArticleListPage;
+export default ProductList;

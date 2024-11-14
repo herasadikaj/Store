@@ -65,12 +65,14 @@ const Sidebar = ({ onCategorySelect }: { onCategorySelect: (category: string) =>
             </Link>
          
           </ListItem>
+
+          <ListItem button>
+            <Link to="/cart" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <ListItemText primary="Cart" />
+            </Link>
+         
+          </ListItem>
         </List>
-        {['Cart', 'Trending'].map((text) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
       </Drawer>
     </div>
   );

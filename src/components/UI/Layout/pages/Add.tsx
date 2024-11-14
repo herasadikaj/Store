@@ -17,9 +17,10 @@ const Form = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
   const { addArticle } = useArticles(); // Get the addArticle function from context
 
+  // Handle form submission
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const newArticle = {
-      id: Math.floor(Math.random() * 1000), // You might want to generate a proper ID here
+      id: Math.floor(Math.random() * 1000), // Generate a random ID (you might want to improve this logic)
       ...data,
     };
     addArticle(newArticle); // Add the new article to the context
@@ -27,9 +28,11 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: 600, margin: '0 auto', padding: 16 }}>
-      <Layout onCategorySelect={function (category: string): void {
-              throw new Error('Function not implemented.');
-          } }>
+      {/* Assuming Layout accepts onCategorySelect function */}
+      <Layout onCategorySelect={(category: string) => { 
+        // Implement the category selection logic here if necessary
+        console.log('Selected category:', category); 
+      }}>
         <Grid container spacing={2}>
           {/* Name */}
           <Grid item xs={12}>
