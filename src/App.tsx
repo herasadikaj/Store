@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ArticleListPage from './components/UI/Layout/pages/List';
-import Form from './components/UI/Layout/pages/Add';
+import ArticleListPage from './components/UI/pages/List';
+import Form from './components/UI/pages/Add';
 import { ArticlesProvider } from './components/Context/ArticlesContext';
 import { CartProvider } from './components/Context/cartContext';  
-import Cart from './components/UI/Layout/pages/Cart';
+import Cart from './components/UI/pages/Cart';
 
 const App = () => {
     return (

@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
+
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { TextField, Button, MenuItem, Select, InputLabel, FormControl, FormHelperText, Grid } from '@mui/material';
-import { useArticles } from '../../../Context/ArticlesContext'; // Import the context
-import Layout from '../Layout';
+import { useArticles } from '../../Context/ArticlesContext'; 
+import Layout from '../Layout/Layout';
 
 type Inputs = {
   name: string;
@@ -15,26 +14,25 @@ type Inputs = {
 
 const Form = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
-  const { addArticle } = useArticles(); // Get the addArticle function from context
+  const { addArticle } = useArticles();
 
-  // Handle form submission
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const newArticle = {
-      id: Math.floor(Math.random() * 1000), // Generate a random ID (you might want to improve this logic)
+      id: Math.floor(Math.random() * 1000), 
       ...data,
     };
-    addArticle(newArticle); // Add the new article to the context
+    addArticle(newArticle); 
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: 600, margin: '0 auto', padding: 16 }}>
-      {/* Assuming Layout accepts onCategorySelect function */}
+     
       <Layout onCategorySelect={(category: string) => { 
-        // Implement the category selection logic here if necessary
+      
         console.log('Selected category:', category); 
       }}>
         <Grid container spacing={2}>
-          {/* Name */}
+        
           <Grid item xs={12}>
             <TextField
               label="Name"
@@ -46,7 +44,7 @@ const Form = () => {
             />
           </Grid>
 
-          {/* Description */}
+
           <Grid item xs={12}>
             <TextField
               label="Description"
@@ -60,7 +58,7 @@ const Form = () => {
             />
           </Grid>
 
-          {/* Price */}
+    
           <Grid item xs={12}>
             <TextField
               label="Price"
@@ -73,7 +71,6 @@ const Form = () => {
             />
           </Grid>
 
-          {/* Type */}
           <Grid item xs={12}>
             <FormControl fullWidth variant="outlined" error={!!errors.type}>
               <InputLabel>Type</InputLabel>
@@ -92,7 +89,7 @@ const Form = () => {
             </FormControl>
           </Grid>
 
-          {/* Image URL */}
+   
           <Grid item xs={12}>
             <TextField
               label="Image URL"
@@ -104,7 +101,6 @@ const Form = () => {
             />
           </Grid>
 
-          {/* Submit Button */}
           <Grid item xs={12}>
             <Button variant="contained" color="primary" type="submit" fullWidth>
               Add Product

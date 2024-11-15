@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// Sidebar.tsx
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Drawer from '@mui/material/Drawer';
