@@ -1,14 +1,15 @@
-
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { TextField, Button, MenuItem, Select, InputLabel, FormControl, FormHelperText, Grid } from '@mui/material';
 import { useArticles } from '../../Context/ArticlesContext'; 
 import Layout from '../Layout/Layout';
 
+type ProductType = "T-shirt" | "Shoes" | "Jeans";
+
 type Inputs = {
   name: string;
   description: string;
   price: string;
-  type: string;
+  type: ProductType;  
   image: string;
 };
 
@@ -19,20 +20,23 @@ const Form = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const newArticle = {
       id: Math.floor(Math.random() * 1000), 
-      ...data,
+      name: data.name,
+      description: data.description,
+      price: data.price,
+      type: data.type, 
+      image: data.image,
     };
+
+    
     addArticle(newArticle); 
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: 600, margin: '0 auto', padding: 16 }}>
-     
       <Layout onCategorySelect={(category: string) => { 
-      
         console.log('Selected category:', category); 
       }}>
         <Grid container spacing={2}>
-        
           <Grid item xs={12}>
             <TextField
               label="Name"
@@ -43,7 +47,6 @@ const Form = () => {
               helperText={errors.name ? errors.name.message : ""}
             />
           </Grid>
-
 
           <Grid item xs={12}>
             <TextField
@@ -58,13 +61,12 @@ const Form = () => {
             />
           </Grid>
 
-    
           <Grid item xs={12}>
             <TextField
               label="Price"
               fullWidth
               variant="outlined"
-              type="number"
+              type="text"
               {...register("price", { required: "Price is required" })}
               error={!!errors.price}
               helperText={errors.price ? errors.price.message : ""}
@@ -89,7 +91,6 @@ const Form = () => {
             </FormControl>
           </Grid>
 
-   
           <Grid item xs={12}>
             <TextField
               label="Image URL"

@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { useArticles } from "../../Context/ArticlesContext";
 import Layout from "../Layout/Layout";
 import Card from "./Card";
+import { Button, TextField, Typography, Grid, Box } from "@mui/material";
 
-const ProductList: React.FC = () => {
+const ProductList: React.FC = () => { 
   const { articlesList, deleteArticle, editArticle } = useArticles();
   const [editMode, setEditMode] = useState(false);
   const [currentArticle, setCurrentArticle] = useState<any>(null);
@@ -25,42 +27,63 @@ const ProductList: React.FC = () => {
 
   return (
     <Layout onCategorySelect={(category: string) => { console.log('Category selected:', category); }}>
-      <div>
-        <h2>Product List</h2>
-        <div className="product-grid">
-          {articlesList.map((article) => (
-            <Card 
-              key={article.id} 
-              article={article} 
-              onEdit={handleEdit} 
-              onDelete={handleDelete} 
-            />
+      <Box sx={{ padding: 2 }}>
+        <Typography variant="h4" gutterBottom>
+          Product List
+        </Typography>
+        <Grid container spacing={2} className="product-grid">
+          {articlesList.map((article: any) => (
+            <Grid item xs={12} sm={6} md={4} key={article.id}>
+              <Card 
+                article={article} 
+                onEdit={handleEdit} 
+                onDelete={handleDelete} 
+              />
+            </Grid>
           ))}
-        </div>
+        </Grid>
 
         {editMode && currentArticle && (
-          <div className="edit-form">
-            <h3>Edit Article</h3>
+          <Box className="edit-form" sx={{ marginTop: 4 }}>
+            <Typography variant="h5" gutterBottom>
+              Edit Article
+            </Typography>
             <form onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="text"
+              <TextField
+                label="Name"
+                fullWidth
+                margin="normal"
                 value={currentArticle.name}
                 onChange={(e) => setCurrentArticle({ ...currentArticle, name: e.target.value })}
               />
-              <input
-                type="text"
+              <TextField
+                label="Price"
+                fullWidth
+                margin="normal"
                 value={currentArticle.price}
                 onChange={(e) => setCurrentArticle({ ...currentArticle, price: e.target.value })}
               />
-              <textarea
+              <TextField
+                label="Description"
+                fullWidth
+                multiline
+                rows={4}
+                margin="normal"
                 value={currentArticle.description}
                 onChange={(e) => setCurrentArticle({ ...currentArticle, description: e.target.value })}
               />
-              <button type="submit" onClick={() => handleSave(currentArticle)}>Save</button>
+              <Button 
+                variant="contained" 
+                color="primary" 
+                onClick={() => handleSave(currentArticle)}
+                sx={{ marginTop: 2 }}
+              >
+                Save
+              </Button>
             </form>
-          </div>
+          </Box>
         )}
-      </div>
+      </Box>
     </Layout>
   );
 };

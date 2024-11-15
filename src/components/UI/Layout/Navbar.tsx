@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Drawer from '@mui/material/Drawer';
@@ -8,7 +7,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import ListItem from '@mui/material/ListItem';
 
 const Sidebar = ({ onCategorySelect }: { onCategorySelect: (category: string) => void }) => {
   const [open, setOpen] = useState(true);
@@ -17,8 +15,8 @@ const Sidebar = ({ onCategorySelect }: { onCategorySelect: (category: string) =>
     setOpen(!open);
   };
 
-  const handleCategoryClick = (category: string) => {
-    onCategorySelect(category);
+  const handleCategorySelect = (category: string) => {
+    onCategorySelect(category); 
   };
 
   return (
@@ -33,7 +31,7 @@ const Sidebar = ({ onCategorySelect }: { onCategorySelect: (category: string) =>
           zIndex: 1,
         }}
       >
-        {open ? <KeyboardArrowLeftIcon /> : <KeyboardArrowRightIcon />}
+        {open ? <KeyboardArrowLeftIcon color="primary" /> : <KeyboardArrowRightIcon />}
       </IconButton>
 
       <Drawer
@@ -51,26 +49,23 @@ const Sidebar = ({ onCategorySelect }: { onCategorySelect: (category: string) =>
         }}
       >
         <List>
-         
-          <ListItemButton>
+          <ListItemButton onClick={() => handleCategorySelect("Products")}>
             <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
               <ListItemText primary="Products" />
             </Link>
           </ListItemButton>
 
-          <ListItem button>
+          <ListItemButton onClick={() => handleCategorySelect("Add Product")}>
             <Link to="/add-product" style={{ textDecoration: 'none', color: 'inherit' }}>
               <ListItemText primary="Add Product" />
             </Link>
-         
-          </ListItem>
+          </ListItemButton>
 
-          <ListItem button>
+          <ListItemButton onClick={() => handleCategorySelect("Cart")}>
             <Link to="/cart" style={{ textDecoration: 'none', color: 'inherit' }}>
               <ListItemText primary="Cart" />
             </Link>
-         
-          </ListItem>
+          </ListItemButton>
         </List>
       </Drawer>
     </div>

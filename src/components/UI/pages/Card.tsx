@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Button, Card as MCard, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import { useCart } from '../../Context/cartContext';
