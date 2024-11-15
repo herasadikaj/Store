@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
-import { Button, Card as MCard, CardContent, CardMedia, Typography, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Button, Card as MCard, CardContent, CardMedia, Typography, Box, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { useCart } from '../../Context/cartContext';
+import { AiOutlineShoppingCart, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'; // Import icons
 
 interface CardProps {
   article: any;
@@ -11,9 +12,33 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ article, onEdit, onDelete }) => {
   const { addToCart } = useCart();
+  
+  const [openDialog, setOpenDialog] = useState(false);
+  const [editedArticle, setEditedArticle] = useState(article);
 
   const handleAddToCart = () => {
-    addToCart(article); 
+    addToCart(article);
+  };
+
+  const handleDialogOpen = () => {
+    setOpenDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEditedArticle({
+      ...editedArticle,
+      [name]: value,
+    });
+  };
+
+  const handleFormSubmit = () => {
+    onEdit(editedArticle); 
+    setOpenDialog(false);
   };
 
   return (
@@ -40,25 +65,81 @@ const Card: React.FC<CardProps> = ({ article, onEdit, onDelete }) => {
         <Button
           variant="contained"
           color="primary"
-          onClick={handleAddToCart} 
+          onClick={handleAddToCart}
+          startIcon={<AiOutlineShoppingCart />}
         >
-          Add to Cart
+         
         </Button>
         <Button
           variant="outlined"
           color="secondary"
-          onClick={() => onEdit(article)} 
+          onClick={handleDialogOpen}
+          startIcon={<AiOutlineEdit />}
         >
-          Edit
+          
         </Button>
         <Button
           variant="outlined"
           color="error"
-          onClick={() => onDelete(article.id)} 
+          onClick={() => onDelete(article.id)}
+          startIcon={<AiOutlineDelete />}
         >
-          Delete
+        
         </Button>
       </Box>
+
+      
+      <Dialog open={openDialog} onClose={handleDialogClose}>
+        <DialogTitle>Edit Product</DialogTitle>
+        <DialogContent>
+          <TextField
+            label="Product Name"
+            fullWidth
+            variant="outlined"
+            value={editedArticle.name}
+            onChange={handleInputChange}
+            name="name"
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Description"
+            fullWidth
+            variant="outlined"
+            multiline
+            rows={4}
+            value={editedArticle.description}
+            onChange={handleInputChange}
+            name="description"
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Price"
+            fullWidth
+            variant="outlined"
+            value={editedArticle.price}
+            onChange={handleInputChange}
+            name="price"
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Image URL"
+            fullWidth
+            variant="outlined"
+            value={editedArticle.image}
+            onChange={handleInputChange}
+            name="image"
+            sx={{ mb: 2 }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDialogClose} color="secondary">
+            Cancel
+          </Button>
+          <Button onClick={handleFormSubmit} color="primary">
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
     </MCard>
   );
 };

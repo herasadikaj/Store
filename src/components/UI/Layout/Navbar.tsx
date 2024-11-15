@@ -31,7 +31,7 @@ const Sidebar = ({ onCategorySelect }: { onCategorySelect: (category: string) =>
           zIndex: 1,
         }}
       >
-        {open ? <KeyboardArrowLeftIcon color="primary" /> : <KeyboardArrowRightIcon />}
+        {open ? <KeyboardArrowLeftIcon color="primary" /> : <KeyboardArrowRightIcon color="primary"/>}
       </IconButton>
 
       <Drawer
