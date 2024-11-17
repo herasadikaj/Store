@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { TextField, Button, MenuItem, Select, InputLabel, FormControl, FormHelperText, Grid, Box, Typography, Container, Card, CardContent } from '@mui/material';
 import { useArticles } from '../../Context/ArticlesContext'; 
 import Layout from '../Layout/Layout';
-import { AiOutlineDollar, AiOutlineTag, AiOutlineInfoCircle, AiOutlinePicture } from 'react-icons/ai'; // Importing icons
+import { AiOutlineDollar, AiOutlineTag, AiOutlineInfoCircle, AiOutlinePicture } from 'react-icons/ai'; 
 
 type ProductType = "T-shirt" | "Shoes" | "Jeans";
 
@@ -33,14 +33,14 @@ const Form = () => {
 
   return (
     <Container maxWidth="xl" sx={{ display: 'flex', height: '100vh', justifyContent: 'center', alignItems: 'center' }}>
-      {/* Form Content Area */}
+      
       <Box
         sx={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           flexDirection: 'column',
-          marginLeft: '250px', // Adjust for the sidebar width (can be dynamic if sidebar visibility is toggled)
+          marginLeft: '250px', 
           padding: '20px',
           width: '100%',
         }}
@@ -48,9 +48,7 @@ const Form = () => {
         <Card sx={{ maxWidth: 800, width: '100%', boxShadow: 8, borderRadius: 3 }}>
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column' }}>
-              <Layout onCategorySelect={(category: string) => { 
-                console.log('Selected category:', category); 
-              }}>
+              <Layout>
                 <Box sx={{ mb: 4 }}>
                   <Typography variant="h3" align="center" sx={{ fontWeight: 700, mb: 2, color: '#333' }}>
                     Add New Product

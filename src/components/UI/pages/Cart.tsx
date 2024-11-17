@@ -7,7 +7,7 @@ const Cart: React.FC = () => {
   const { cart, addToCart, removeFromCart, clearCart, totalPrice } = useCart();
 
   return (
-    <Layout onCategorySelect={() => {}}>
+    <Layout>
       <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
         <Typography variant="h4" sx={{ marginBottom: 2 }}>
           Shopping Cart

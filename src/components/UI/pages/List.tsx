@@ -26,8 +26,8 @@ const ProductList: React.FC = () => {
   };
 
   return (
-    <Layout onCategorySelect={(category: string) => { console.log('Category selected:', category); }}>
-      <Box sx={{ padding: 2 }}>
+    <Layout>
+      <Box sx={{ padding: 2, backgroundColor: 'white' }}> 
         <Typography variant="h4" gutterBottom>
           Product List
         </Typography>

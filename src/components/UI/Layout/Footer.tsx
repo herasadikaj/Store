@@ -5,13 +5,13 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        width: '100%',  // Ensures the footer spans full width
-        py: 2,          // Adjusted padding for a more balanced height
-        backgroundColor: '#B83D02',  // Background color
-        color: 'white',  // Text color
-        bottom: 0,
-        left: 0,
-        position: 'relative', // Ensures the footer sticks to the bottom if content is short
+        width: '100%',
+        py: 2,
+        margin: 0, 
+        padding: 0, 
+        backgroundColor: '#FFF',
+        color: 'black',
+        position: 'relative', 
       }}
     >
       <Container maxWidth="xl">

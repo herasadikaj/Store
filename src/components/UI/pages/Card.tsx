@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button, Card as MCard, CardContent, CardMedia, Typography, Box, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { useCart } from '../../Context/cartContext';
-import { AiOutlineShoppingCart, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'; // Import icons
+import { AiOutlineShoppingCart, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'; 
 
 interface CardProps {
   article: any;
@@ -42,7 +42,13 @@ const Card: React.FC<CardProps> = ({ article, onEdit, onDelete }) => {
   };
 
   return (
-    <MCard sx={{ maxWidth: 345, margin: 2, borderRadius: 2, boxShadow: 3 }}>
+    <MCard sx={{ 
+      maxWidth: 345, 
+      margin: 2, 
+      borderRadius: 2, 
+      boxShadow: 3, 
+      border: '1px solid black', 
+    }}>
       <CardMedia
         component="img"
         height="300"
@@ -64,15 +70,13 @@ const Card: React.FC<CardProps> = ({ article, onEdit, onDelete }) => {
       <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: 1 }}>
         <Button
           variant="contained"
-          color="primary"
           onClick={handleAddToCart}
           startIcon={<AiOutlineShoppingCart />}
         >
-         
+        
         </Button>
         <Button
           variant="outlined"
-          color="secondary"
           onClick={handleDialogOpen}
           startIcon={<AiOutlineEdit />}
         >
@@ -84,11 +88,10 @@ const Card: React.FC<CardProps> = ({ article, onEdit, onDelete }) => {
           onClick={() => onDelete(article.id)}
           startIcon={<AiOutlineDelete />}
         >
-        
+         
         </Button>
       </Box>
 
-      
       <Dialog open={openDialog} onClose={handleDialogClose}>
         <DialogTitle>Edit Product</DialogTitle>
         <DialogContent>

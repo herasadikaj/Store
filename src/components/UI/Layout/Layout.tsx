@@ -1,30 +1,41 @@
-import React from 'react';
-import Sidebar from './Navbar'; 
-import Footer from './Footer';  
+import React, { useState } from 'react';
+import Navbar from './Navbar';
+import Sidebar from './Sidebar';
+import Footer from './Footer';
 import { Box } from '@mui/material';
 
-interface LayoutProps {
-  onCategorySelect: (category: string) => void;
-  children?: React.ReactNode;
-}
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const [open, setOpen] = useState(false);
 
-const Layout: React.FC<LayoutProps> = ({ onCategorySelect, children }) => {
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
+
+  const handleCategorySelect = (category: string) => {
+    console.log('Selected Category:', category);
+  };
+
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
- 
-      <Box sx={{ display: 'flex', flexGrow: 1 }}>
-       
-        <Sidebar onCategorySelect={onCategorySelect} />
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Navbar toggleDrawer={toggleDrawer} />
 
-
-        <Box sx={{ flexGrow: 1, p: 4, overflowY: 'auto' }}>
+      <Box sx={{ display: 'flex', flex: 1 }}>
+        <Sidebar open={open} onCategorySelect={handleCategorySelect} />
+        <main
+          style={{
+            flexGrow: 1,
+            marginLeft: open ? 250 : 0,  
+            transition: 'margin-left 0.3s ease',  
+            padding: '20px',
+            marginTop: '64px',  
+          }}
+        >
           {children}
-        </Box>
+        </main>
       </Box>
 
-  
       <Footer />
-    </Box>
+    </div>
   );
 };
 

@@ -4,6 +4,7 @@ import Form from './components/UI/pages/Add';
 import { ArticlesProvider } from './components/Context/ArticlesContext';
 import { CartProvider } from './components/Context/cartContext';  
 import Cart from './components/UI/pages/Cart';
+import Homepage from './components/UI/pages/Homepage';
 
 const App = () => {
   
@@ -16,8 +17,8 @@ const App = () => {
             <div style={{ marginLeft: 250, padding: 20, flexGrow: 1 }}>
               <Routes>
                 <Route 
-                  path="/" element={<ArticleListPage />} 
-                />
+                  path="/" element={<Homepage/>}/>
+                 <Route  path="/product" element={<ArticleListPage />} />
                 <Route path="/add-product" element={<Form />} />
                 <Route path="/cart" element={<Cart />} />
               </Routes>
