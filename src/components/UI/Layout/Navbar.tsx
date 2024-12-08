@@ -1,6 +1,9 @@
-import { AppBar, Toolbar, Typography, IconButton, Link } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import  AppBar  from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
 const Navbar = ({ toggleDrawer }: { toggleDrawer: () => void }) => {
   return (
     <AppBar

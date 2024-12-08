@@ -10,6 +10,7 @@ interface CardProps {
   onDelete: (id: number) => void;
 }
 
+
 const Card: React.FC<CardProps> = ({ article, onEdit, onDelete }) => {
   const { addToCart } = useCart();
   
@@ -92,57 +93,68 @@ const Card: React.FC<CardProps> = ({ article, onEdit, onDelete }) => {
         </Button>
       </Box>
 
-      <Dialog open={openDialog} onClose={handleDialogClose}>
-        <DialogTitle>Edit Product</DialogTitle>
-        <DialogContent>
-          <TextField
-            label="Product Name"
-            fullWidth
-            variant="outlined"
-            value={editedArticle.name}
-            onChange={handleInputChange}
-            name="name"
-            sx={{ mb: 2 }}
-          />
-          <TextField
-            label="Description"
-            fullWidth
-            variant="outlined"
-            multiline
-            rows={4}
-            value={editedArticle.description}
-            onChange={handleInputChange}
-            name="description"
-            sx={{ mb: 2 }}
-          />
-          <TextField
-            label="Price"
-            fullWidth
-            variant="outlined"
-            value={editedArticle.price}
-            onChange={handleInputChange}
-            name="price"
-            sx={{ mb: 2 }}
-          />
-          <TextField
-            label="Image URL"
-            fullWidth
-            variant="outlined"
-            value={editedArticle.image}
-            onChange={handleInputChange}
-            name="image"
-            sx={{ mb: 2 }}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDialogClose} color="secondary">
-            Cancel
-          </Button>
-          <Button onClick={handleFormSubmit} color="primary">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <Dialog 
+  open={openDialog} 
+  onClose={handleDialogClose}
+  fullWidth
+  maxWidth="md" 
+>
+  <DialogTitle>Edit Product</DialogTitle>
+  <DialogContent 
+    sx={{ 
+      height: '500px', 
+      overflow: 'auto' 
+    }}
+  >
+    <TextField
+      label="Product Name"
+      fullWidth
+      variant="outlined"
+      value={editedArticle.name}
+      onChange={handleInputChange}
+      name="name"
+      sx={{ mb: 2 }}
+    />
+    <TextField
+      label="Description"
+      fullWidth
+      variant="outlined"
+      multiline
+      rows={4}
+      value={editedArticle.description}
+      onChange={handleInputChange}
+      name="description"
+      sx={{ mb: 2 }}
+    />
+    <TextField
+      label="Price"
+      fullWidth
+      variant="outlined"
+      value={editedArticle.price}
+      onChange={handleInputChange}
+      name="price"
+      sx={{ mb: 2 }}
+    />
+    <TextField
+      label="Image URL"
+      fullWidth
+      variant="outlined"
+      value={editedArticle.image}
+      onChange={handleInputChange}
+      name="image"
+      sx={{ mb: 2 }}
+    />
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={handleDialogClose} color="secondary">
+      Cancel
+    </Button>
+    <Button onClick={handleFormSubmit} color="primary">
+      Save
+    </Button>
+  </DialogActions>
+</Dialog>
+
     </MCard>
   );
 };

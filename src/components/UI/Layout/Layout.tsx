@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
-import { Box } from '@mui/material';
+import  Box  from '@mui/material/Box';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState(false);

@@ -26,7 +26,7 @@ export const articles: Article[] = [
   // jeans
   { id: 9, type: "Jeans", name: "Slim Fit Jeans", price: "60", image: "https://shop.mango.com/assets/rcs/pics/static/T7/fotos/S/77040595_TC.jpg?imwidth=2048&imdensity=1&ts=1715253390801", description: "Stylish slim-fit jeans made with stretchy fabric for a snug fit." },
   { id: 10, type: "Jeans", name: "Straight Cut Jeans", price: "50", image: "https://www.replayjeans.com/dk/media/catalog/product/M/9/M9Z1_000_800-727_011_1.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:", description: "Classic straight-cut jeans that offer comfort and a timeless style." },
-  { id: 11, type: "Jeans", name: "Ripped Jeans", price: "55", image: "https://i5.walmartimages.com/asr/af9e98b0-1155-4d18-b10a-c3482607c015.cd5f75671315dd01ebb367f07e2971cd.jpeg", description: "Trendy ripped jeans with a distressed look, perfect for casual wear." },
+  { id: 11, type: "Jeans", name: "Ripped Jeans", price: "55", image: "https://i5.walmartimages.com/asr/af9e98b0-1155-4d18-b10a-c3482607c015.cd5f75671315dd01ebb367f07e2971cd.jpeg", description: "Ripped jeans with a distressed look, perfect for casual wear." },
   { id: 12, type: "Jeans", name: "Jeans", price: "65", image: "https://pyxis.nymag.com/v1/imgs/c68/c33/c38ae8241c09ae91d0dd5a8d264d15768c-ribcage-skinny.rsquare.w600.png", description: "Comfortable high-waisted jeans, great for pairing with crop tops." }
 ];
 
